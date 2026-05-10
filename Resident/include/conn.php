@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$database = "db-barangay-e-system";
+$database = "db-barangay-system";
 $username = "root";
 $password = "";
 $conn = mysqli_connect($servername, $username, $password, $database);

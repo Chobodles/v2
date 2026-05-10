@@ -6,6 +6,22 @@
         <link rel="stylesheet" href="cssfile/blotterdemo.css" />
         <title>Barangay Blotter Form - Barangay Tugtug</title>
         <link rel="icon" href="photos/logo.png.png" />
+        <style>
+            /* Clear Button Styles */
+            .btn-clear {
+                background-color: #dc2626;
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.2s;
+            }
+            .btn-clear:hover {
+                background-color: #991b1b;
+            }
+        </style>
     </head>
     <body>
         <button class="btn-back" onclick="history.back()">
@@ -36,6 +52,7 @@
                 class="complaint-form"
                 action="php/submit_blotter.php"
                 method="POST"
+                enctype="multipart/form-data"
             >
                 <div class="row">
                     <div class="form-group">
@@ -47,6 +64,8 @@
                             name="first_name"
                             placeholder="e.g. Juan"
                             required
+                            pattern="[A-Za-z\s.]+"
+                            title="Letters only"
                         />
                     </div>
                     <div class="form-group">
@@ -56,6 +75,8 @@
                             name="last_name"
                             placeholder="e.g. Dela Cruz"
                             required
+                            pattern="[A-Za-z\s.]+"
+                            title="Letters only"
                         />
                     </div>
                 </div>
@@ -67,6 +88,7 @@
                             type="text"
                             name="middle_name"
                             placeholder="e.g. Santos"
+                            pattern="[A-Za-z\s.]+"
                         />
                     </div>
                     <div class="form-group">
@@ -90,6 +112,7 @@
                             name="age"
                             min="1"
                             max="120"
+                            placeholder="0"
                             required
                         />
                     </div>
@@ -125,7 +148,12 @@
                         <label
                             >PETSA (DATE) <span class="required">*</span></label
                         >
-                        <input type="date" name="incident_date" required />
+                        <input
+                            type="date"
+                            name="incident_date"
+                            id="incident_date"
+                            required
+                        />
                     </div>
                     <div class="form-group">
                         <label
@@ -137,28 +165,10 @@
 
                 <div class="form-group full-width">
                     <label
-                        >NAGSADYA DITO SI (NAME OF COMPLAINANT)
+                        >PERSON COMPLAINED AGAINST
                         <span class="required">*</span></label
                     >
-                    <input type="text" name="complainant_name" required />
-                    <div class="checkbox-group">
-                        <label
-                            ><input
-                                type="radio"
-                                name="age_category"
-                                value="minor"
-                            />
-                            Minor</label
-                        >
-                        <label
-                            ><input
-                                type="radio"
-                                name="age_category"
-                                value="adult"
-                            />
-                            May Sapat na Gulang</label
-                        >
-                    </div>
+                    <input type="text" name="complaint_against" required />
                 </div>
 
                 <div class="form-group full-width">
@@ -174,66 +184,89 @@
                         <option value="Property Dispute">
                             Property Dispute
                         </option>
-                        <option value="Noise Complaint">Noise Complaint</option>
                         <option value="Theft">Theft</option>
-                        <option value="Trespassing">Trespassing</option>
-                        <option value="Family Dispute">Family Dispute</option>
                         <option value="Others">Others</option>
                     </select>
                 </div>
 
                 <div class="form-group full-width">
                     <label
-                        >REKLAMO / TULONG (FOR/PARA KAY/SA)
+                        >NATURE OF COMPLAINT
                         <span class="required">*</span></label
                     >
                     <textarea
                         name="complaint_details"
                         rows="4"
-                        placeholder="Nature of complaint..."
                         required
                     ></textarea>
                 </div>
 
-                <div class="location-footer">
-                    <p>
-                        Ipinatala ganap na ika ____________ ng (umaga/hapon),
-                        ika ____________ ng ____________, 20____
-                    </p>
-                    <p>
-                        Tanggapan ng Punong Barangay, Tugtug, San Jose,
-                        Batangas.
+                <div class="form-group full-width">
+                    <label
+                        >UPLOAD VALID ID <span class="required">*</span></label
+                    >
+                    <div
+                        class="file-input-wrapper"
+                        style="display: flex; gap: 10px; align-items: center"
+                    >
+                        <input
+                            type="file"
+                            name="id_image"
+                            id="id_image"
+                            accept="image/*"
+                            required
+                            style="flex-grow: 1"
+                        />
+                        <button
+                            type="button"
+                            id="clear-file"
+                            class="btn-clear"
+                            style="display: none"
+                        >
+                            Clear
+                        </button>
+                    </div>
+                    <p class="field-hint">
+                        Upload a clear photo for identity verification.
                     </p>
                 </div>
 
-                <hr class="divider" />
-
-                <div class="signature-section">
-                    <div class="form-group full-width text-center">
-                        <div class="sig-line"></div>
-                        <label
-                            >Pangalan / Lagda sa Ibabaw ng Nagrereklamo</label
-                        >
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group text-center">
-                            <div class="sig-line"></div>
-                            <label>SAKSI (WITNESS)</label>
-                        </div>
-                        <div class="form-group text-center">
-                            <div class="sig-line"></div>
-                            <label>SAKSI (WITNESS)</label>
-                        </div>
-                    </div>
-
+                <div
+                    class="privacy-note"
+                    style="
+                        margin: 20px 0;
+                        padding: 15px;
+                        background: #f9f9f9;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                    "
+                >
                     <div
-                        class="form-group"
-                        style="max-width: 300px; margin-top: 20px"
+                        style="
+                            display: flex;
+                            align-items: flex-start;
+                            gap: 10px;
+                        "
                     >
-                        <label>NAGPATOTOO:</label>
-                        <div class="sig-line"></div>
-                        <label class="sub-label">KAGAWAD ON DUTY</label>
+                        <input
+                            type="checkbox"
+                            id="privacy_agree"
+                            name="privacy_agree"
+                            required
+                        />
+                        <label
+                            for="privacy_agree"
+                            style="
+                                font-size: 0.85rem;
+                                color: #333;
+                                cursor: pointer;
+                            "
+                        >
+                            <strong>Data Privacy Notice:</strong> I agree to the
+                            collection and processing of my personal data by
+                            Barangay Tugtug for blotter filing in compliance
+                            with the Data Privacy Act of 2012.
+                        </label>
                     </div>
                 </div>
 
@@ -244,5 +277,53 @@
                 </div>
             </form>
         </div>
+
+        <script>
+            window.onload = function () {
+                // 1. Prevent Future Dates for Incident
+                const dateInput = document.getElementById("incident_date");
+                const today = new Date().toISOString().split("T")[0];
+                dateInput.setAttribute("max", today);
+
+                // 2. Image Upload & Clear Logic
+                const fileInput = document.getElementById("id_image");
+                const clearBtn = document.getElementById("clear-file");
+
+                fileInput.onchange = function () {
+                    if (this.files && this.files.length > 0) {
+                        clearBtn.style.display = "inline-block";
+                    } else {
+                        clearBtn.style.display = "none";
+                    }
+                };
+
+                clearBtn.onclick = function () {
+                    fileInput.value = "";
+                    this.style.display = "none";
+                };
+
+                // 3. Handle Error Alerts from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const error = urlParams.get("error");
+
+                if (error) {
+                    let message = "An error occurred.";
+                    if (error === "name_numbers")
+                        message = "Error: Names cannot contain numbers.";
+                    else if (error === "upload_fail")
+                        message = "Error: Failed to upload ID image.";
+                    else if (error === "db_fail")
+                        message = "Database Error: Could not save the record.";
+
+                    alert(message);
+                    // Clear the error from URL after alerting
+                    window.history.replaceState(
+                        {},
+                        document.title,
+                        window.location.pathname,
+                    );
+                }
+            };
+        </script>
     </body>
 </html>

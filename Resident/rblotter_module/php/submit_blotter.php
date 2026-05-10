@@ -1,10 +1,8 @@
 <?php
-// Ensure you are pointing to where your actual connection file is
-// Based on your image, it might be in a top-level 'include' folder
 $servername = "localhost";
-$database = "db-barangay-e-system"; // Verify if it is _ or -
 $username = "root";
 $password = "";
+$database = "db-barangay-system";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
 
@@ -13,49 +11,95 @@ if (!$conn) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $ref_number =
-        "BT-" . date("Y") . "-" . strtoupper(substr(md5(uniqid()), 0, 5));
+    // Inputs
+    $first_name = trim($_POST["first_name"]);
+    $last_name = trim($_POST["last_name"]);
+    $middle_name = trim($_POST["middle_name"]);
+    $suffix = $_POST["suffix"];
+    $age = intval($_POST["age"]);
+    $civil_status = $_POST["civil_status"];
+    $address = trim($_POST["address"]);
+    $occupation = trim($_POST["occupation"]);
+    $incident_date = $_POST["incident_date"];
+    $incident_time = $_POST["incident_time"];
+    $complaint_against = trim($_POST["complaint_against"]);
+    $complaint_type = $_POST["complaint_type"];
+    $complaint_details = trim($_POST["complaint_details"]);
 
-    // Ensure every column here exists exactly like this in phpMyAdmin
+    // 1. Validation: No numbers in names
+    if (
+        preg_match("/[0-9]/", $first_name) ||
+        preg_match("/[0-9]/", $last_name)
+    ) {
+        header("Location: ../blotterdemo.html?error=name_numbers");
+        exit();
+    }
+
+    // 2. File Upload Handling
+    $target_dir = "uploads/";
+    if (!is_dir($target_dir)) {
+        mkdir($target_dir, 0777, true);
+    }
+
+    $file_ext = pathinfo($_FILES["id_image"]["name"], PATHINFO_EXTENSION);
+    $new_filename = "ID_" . time() . "_" . $last_name . "." . $file_ext;
+    $id_image_path = $target_dir . $new_filename;
+
+    if (!move_uploaded_file($_FILES["id_image"]["tmp_name"], $id_image_path)) {
+        header("Location: ../blotterdemo.html?error=upload_fail");
+        exit();
+    }
+
+    // Generate Reference
+
+    $ref_number =
+        "BRGY-" .
+        date("Y") .
+        "-" .
+        str_pad(mt_rand(1, 99999), 5, "0", STR_PAD_LEFT);
+
+    // 3. Database Insertion (Matching your 'blotter' table columns)
     $sql = "INSERT INTO blotter (
-                reference_number, first_name, middle_name, last_name, suffix,
-                age, civil_status, address, occupation,
-                petsa, oras, complaint_against, complaint_type, complaint_details,
-                status, submitted_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending', NOW())";
+        reference_number, first_name, middle_name, last_name, suffix,
+        age, civil_status, address, occupation,
+        petsa, oras, complaint_against, complaint_type, complaint_details,
+        id_image_path, status, submitted_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending', NOW())";
 
     $stmt = mysqli_prepare($conn, $sql);
 
     if ($stmt) {
+        // "sssssisssssssss" = 15 placeholders
         mysqli_stmt_bind_param(
             $stmt,
-            "sssssissssssss",
+            "sssssisssssssss",
             $ref_number,
-            $_POST["first_name"],
-            $_POST["middle_name"],
-            $_POST["last_name"],
-            $_POST["suffix"],
-            $_POST["age"],
-            $_POST["civil_status"],
-            $_POST["address"],
-            $_POST["occupation"],
-            $_POST["incident_date"],
-            $_POST["incident_time"],
-            $_POST["complainant_name"],
-            $_POST["complaint_type"],
-            $_POST["complaint_details"],
+            $first_name,
+            $middle_name,
+            $last_name,
+            $suffix,
+            $age,
+            $civil_status,
+            $address,
+            $occupation,
+            $incident_date,
+            $incident_time,
+            $complaint_against,
+            $complaint_type,
+            $complaint_details,
+            $id_image_path,
         );
 
         if (mysqli_stmt_execute($stmt)) {
             header("Location: ../blotterthankyou.html?ref=" . $ref_number);
             exit();
         } else {
-            echo "Execution Error: " . mysqli_stmt_error($stmt);
+            header("Location: ../blotterdemo.html?error=db_fail");
+            exit();
         }
-        mysqli_stmt_close($stmt);
     } else {
-        // This will tell you exactly what is wrong with the SQL syntax or table
-        die("Prepare Error: " . mysqli_error($conn));
+        header("Location: ../blotterdemo.html?error=prepare_fail");
+        exit();
     }
 }
 mysqli_close($conn);
