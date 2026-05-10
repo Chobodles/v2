@@ -9,7 +9,7 @@
     </head>
     <body>
         <button class="btn-back" onclick="history.back()">
-            <image class="backbutton" src="photos/backbutton.png"></image>
+            <img class="backbutton" src="photos/backbutton.png" />
             <label class="back">Back</label>
         </button>
 
@@ -31,8 +31,12 @@
 
             <h2 id="lastline">BARANGAY BLOTTER</h2>
 
-            <form id="blotterForm" class="complaint-form">
-                <!-- Matches blotter table: first_name, middle_name, last_name, suffix -->
+            <form
+                id="blotterForm"
+                class="complaint-form"
+                action="php/submit_blotter.php"
+                method="POST"
+            >
                 <div class="row">
                     <div class="form-group">
                         <label
@@ -89,7 +93,6 @@
                             required
                         />
                     </div>
-                    <!-- Must match DB enum: Single|Married|Widowed|Separated|Annulled -->
                     <div class="form-group">
                         <label
                             >CIVIL STATUS <span class="required">*</span></label
@@ -194,28 +197,8 @@
 
                 <div class="location-footer">
                     <p>
-                        Ipinatala ganap na ika
-                        <input
-                            type="text"
-                            class="inline-input"
-                            style="width: 80px"
-                        />
-                        ng (umaga/hapon), ika
-                        <input
-                            type="text"
-                            class="inline-input"
-                            style="width: 50px"
-                        />
-                        ng
-                        <input
-                            type="text"
-                            class="inline-input"
-                            style="width: 100px"
-                        />, 20<input
-                            type="text"
-                            class="inline-input"
-                            style="width: 30px"
-                        />
+                        Ipinatala ganap na ika ____________ ng (umaga/hapon),
+                        ika ____________ ng ____________, 20____
                     </p>
                     <p>
                         Tanggapan ng Punong Barangay, Tugtug, San Jose,
@@ -255,17 +238,11 @@
                 </div>
 
                 <div class="form-actions">
-                    <button
-                        type="button"
-                        onclick="validateAndSubmit()"
-                        class="submit-btn"
-                    >
+                    <button type="submit" class="submit-btn">
                         Submit Blotter Report
                     </button>
                 </div>
             </form>
         </div>
-
-        <script src="Javascript/blotterform.js"></script>
     </body>
 </html>
