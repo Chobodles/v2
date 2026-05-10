@@ -1,0 +1,171 @@
+/* --- GLOBAL STYLES --- */
+body {
+    margin: 0;
+    background-image: url(../photos/Background.png.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0;
+    animation: fadeIn 0.3s ease 0.1s forwards;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* --- NAVIGATION BAR --- */
+.navigation_container {
+    padding: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Logo-container {
+    display: flex;
+    margin-left: 3%;
+    gap: 15px;
+    align-items: center;
+}
+
+.Logo {
+    width: 80px;
+    height: auto;
+}
+
+.Logo-name {
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    color: rgb(3, 47, 21);
+}
+
+.Logo-name h2 {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.Button-container {
+    display: flex;
+    gap: 25px;
+    margin-right: 5%;
+}
+
+button {
+    border: transparent;
+    background-color: transparent;
+    color: black;
+    font-family: Verdana;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    transition: width 0.5s, border-color 0.2s;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 2px solid rgb(3, 47, 21);
+    width: 110px;
+}
+
+/* --- THANK YOU "PAPER" CONTAINER --- */
+.thank-you-container {
+    position: relative;
+    top: 6vh;
+    background-color: #fcfaf7; /* Beige paper color from Blotter Form */
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.thank-you-container h1 {
+    color: #032f15;
+    margin-top: 0;
+    letter-spacing: 2px;
+}
+
+.sub-message {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* --- REFERENCE BOX --- */
+.ref-box {
+    background-color: #f0f4f1;
+    border: 2px dashed #032f15;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+.ref-label {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #4a5568;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#ref-number {
+    color: #032f15;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+/* --- INSTRUCTIONS --- */
+.instructions {
+    text-align: left;
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 8px;
+    margin-top: 30px;
+    border-left: 4px solid #032f15;
+}
+
+.instructions h3 {
+    color: #032f15;
+    font-size: 1rem;
+    margin-top: 0;
+}
+
+.instructions ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.instructions li {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #2d3748;
+}
+
+/* --- HOME BUTTON --- */
+.home-btn {
+    background-color: #032f15 !important;
+    color: white !important;
+    font-weight: bold !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 15px 40px !important;
+    margin-top: 30px;
+    font-size: 1rem !important;
+    text-transform: uppercase;
+}
+
+.home-btn:hover {
+    background-color: #054d22 !important;
+    width: auto !important;
+    transform: translateY(-2px);
+}

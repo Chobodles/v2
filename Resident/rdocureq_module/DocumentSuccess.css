@@ -1,0 +1,158 @@
+body {
+    margin: 0;
+    background-image: url(../photos/Background.png.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    animation-delay: 1s;
+    opacity: 0;
+    animation: fadeIn 0.3s ease 0.1s forwards;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.thank-you-container {
+    position: relative;
+    top: 6vh;
+    background-color: #fcfaf7;
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.thank-you-container h1 {
+    color: #032f15;
+    margin-top: 0;
+    letter-spacing: 2px;
+    font-size: 1.8rem;
+}
+
+.sub-message {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Document type badge */
+.doc-type-box {
+    background-color: #e8f5e9;
+    border: 2px solid #032f15;
+    padding: 12px 20px;
+    margin: 0 0 15px 0;
+    border-radius: 10px;
+}
+
+.doc-type-label {
+    font-size: 0.72rem;
+    font-weight: bold;
+    color: #4a5568;
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+#doc-type-text {
+    color: #032f15;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Reference box */
+.ref-box {
+    background-color: #f0f4f1;
+    border: 2px dashed #032f15;
+    padding: 20px;
+    margin: 0 0 20px 0;
+    border-radius: 10px;
+}
+
+.ref-label {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #4a5568;
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+#ref-number {
+    color: #032f15;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    letter-spacing: 3px;
+    font-size: 1.6rem;
+}
+
+/* Instructions */
+.instructions {
+    text-align: left;
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border-left: 4px solid #032f15;
+}
+
+.instructions h3 {
+    color: #032f15;
+    font-size: 1rem;
+    margin-top: 0;
+    letter-spacing: 1px;
+}
+
+.instructions ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.instructions li {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #2d3748;
+    line-height: 1.5;
+}
+
+/* Buttons */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.home-btn {
+    background-color: #032f15 !important;
+    color: white !important;
+    font-weight: bold !important;
+    border: none !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 15px 40px !important;
+    font-size: 1rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.home-btn:hover {
+    background-color: #054d22 !important;
+    transform: translateY(-2px);
+    width: auto !important;
+}

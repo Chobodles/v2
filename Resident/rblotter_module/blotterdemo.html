@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cssfile/blotterdemo.css">
+    <title>Barangay Blotter Form - Barangay Tugtug</title>
+    <link rel="icon" href="photos/logo.png.png"/>
+</head>
+<body>
+
+    <button class="btn-back" onclick="history.back()">
+            
+            <image class="backbutton" src="photos/backbutton.png"></image>
+            <label class="back">Back</label>
+
+    </button>
+
+    <div class="form-container">
+        <div class="form-header">
+            <img class="Form-Logo" src="photos/logo.png.png" alt="Barangay Logo"/>
+            
+            <div class="header-text-group">
+                <h1 class="titletop">Republic of the Philippines</h1>
+                <h1 class="titletop">PROVINCE OF BATANGAS</h1>
+                <h1 class="titletop">Municipality of San Jose</h1>
+                <h1 id="title">Barangay Tugtug</h1>
+                <h2 class="office-title">OFFICE OF THE PUNONG BARANGAY</h2>
+            </div>
+        </div>
+
+        <h2 id="lastline">BARANGAY BLOTTER</h2>
+
+        <form id="blotterForm" class="complaint-form">
+            <div class="form-group full-width">
+                <label>NAME</label>
+                <input type="text" name="name" placeholder="Full Name" required>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>AGE</label>
+                    <input type="number" name="age" required>
+                </div>
+                <div class="form-group">
+                    <label>STATUS</label>
+                    <input type="text" name="status" placeholder="Civil Status" required>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label>ADDRESS</label>
+                <input type="text" name="address" required>
+            </div>
+
+            <div class="form-group full-width">
+                <label>OCCUPATION</label>
+                <input type="text" name="occupation" required>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <div class="form-group">
+                    <label>PETSA (DATE)</label>
+                    <input type="date" name="incident_date" required>
+                </div>
+                <div class="form-group">
+                    <label>ORAS (TIME)</label>
+                    <input type="time" name="incident_time" required>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label>NAGSADYA DITO SI (NAME OF COMPLAINANT)</label>
+                <input type="text" name="complainant_name" required>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="age_category" value="minor"> Minor</label>
+                    <label><input type="radio" name="age_category" value="adult"> May Sapat na Gulang</label>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label>COMPLAINT TYPE</label>
+                <select name="complaint_type" required>
+                    <option value="">— Select Type —</option>
+                    <option value="Physical Assault">Physical Assault</option>
+                    <option value="Verbal Abuse">Verbal Abuse</option>
+                    <option value="Property Dispute">Property Dispute</option>
+                    <option value="Noise Complaint">Noise Complaint</option>
+                    <option value="Theft">Theft</option>
+                    <option value="Trespassing">Trespassing</option>
+                    <option value="Family Dispute">Family Dispute</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+
+            <div class="form-group full-width">
+                <label>REKLAMO / TULONG (FOR/PARA KAY/SA)</label>
+                <textarea name="complaint_details" rows="4" placeholder="Nature of complaint..." required></textarea>
+            </div>
+
+            <div class="location-footer">
+                <p>Ipinatala ganap na ika <input type="text" class="inline-input" style="width: 80px;"> ng (umaga/hapon), ika <input type="text" class="inline-input" style="width: 50px;"> ng <input type="text" class="inline-input" style="width: 100px;">, 20<input type="text" class="inline-input" style="width: 30px;"></p>
+                <p>Tanggapan ng Punong Barangay, Tugtug, San Jose, Batangas.</p>
+            </div>
+
+            <hr class="divider">
+
+            <div class="signature-section">
+                <div class="form-group full-width text-center">
+                    <div class="sig-line"></div>
+                    <label>Pangalan / Lagda sa Ibabaw ng Nagrereklamo</label>
+                </div>
+
+                <div class="row">
+                    <div class="form-group text-center">
+                        <div class="sig-line"></div>
+                        <label>SAKSI (WITNESS)</label>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="sig-line"></div>
+                        <label>SAKSI (WITNESS)</label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="max-width: 300px; margin-top: 20px;">
+                    <label>NAGPATOTOO:</label>
+                    <div class="sig-line"></div>
+                    <label class="sub-label">KAGAWAD ON DUTY</label>
+                </div>
+            </div>
+
+            
+
+
+            <div class="form-actions">
+                <button type="button" onclick="validateAndSubmit()" class="submit-btn">Submit Blotter Report</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="Javascript/blotterform.js"></script>
+
+</body>
+</html>
